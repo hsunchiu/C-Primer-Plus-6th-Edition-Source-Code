@@ -1,7 +1,7 @@
 /* praise2.c */
 #include <stdio.h>
 #include <string.h>      /* provides strlen() prototype */
-#define PRAISE "What a super marvelous name!"
+#define PRAISE "What an extraordinary being!"
 int main(void)
 {
     char name[40];
