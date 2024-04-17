@@ -6,7 +6,7 @@ int main(void)
 {
     unsigned long number;
     printf("Enter an integer (q to quit):\n");
-    while (scanf("%ul", &number) == 1)
+    while (scanf("%lu", &number) == 1)
     {
         printf("Binary equivalent: ");
         to_binary(number);
