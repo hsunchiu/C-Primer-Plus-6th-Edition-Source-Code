@@ -2,15 +2,18 @@
 #include <stdio.h>
 #include <string.h>
 
+#define NLEN 30
+
 struct namect {
-    char fname[20];
-    char lname[20];
+    char fname[NLEN];
+    char lname[NLEN];
     int letters;
 };
 
 void getinfo(struct namect *);
 void makeinfo(struct namect *);
 void showinfo(const struct namect *);
+char *s_gets(char *s, int n);
 
 int main(void)
 {
@@ -25,9 +28,9 @@ int main(void)
 void getinfo (struct namect * pst)
 {
     printf("Please enter your first name.\n");
-    gets(pst->fname);
+    s_gets(pst->fname, NLEN);
     printf("Please enter your last name.\n");
-    gets(pst->lname);
+    s_gets(pst->lname, NLEN);
 }
 
 void makeinfo (struct namect * pst)
@@ -40,4 +43,22 @@ void showinfo (const struct namect * pst)
 {
     printf("%s %s, your name contains %d letters.\n",
         pst->fname, pst->lname, pst->letters);
+}
+
+char * s_gets(char *s, int n){
+	char *ret;
+	char *find;
+
+	ret = fgets(s, n, stdin);
+	if(ret){
+		find = strchr(s, '\n');
+		if (find) {
+			*find = '\0';
+		}else{
+			while(getchar() != '\n')
+				continue;
+		}
+	}
+
+	return ret;
 }

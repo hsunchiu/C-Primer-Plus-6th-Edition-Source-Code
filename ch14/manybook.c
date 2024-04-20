@@ -1,5 +1,9 @@
 /* manybook.c -- multiple book inventory */
 #include <stdio.h>
+#include <string.h>
+
+char* s_gets(char *s, int n);
+
 #define MAXTITL   40
 #define MAXAUTL   40
 #define MAXBKS   100              /* maximum number of books  */
@@ -18,11 +22,11 @@ int main(void)
 
     printf("Please enter the book title.\n");
     printf("Press [enter] at the start of a line to stop.\n");
-    while (count < MAXBKS && gets(library[count].title) != NULL
+    while (count < MAXBKS && s_gets(library[count].title, MAXTITL) != NULL
                           && library[count].title[0] != '\0')
     {
         printf("Now enter the author.\n");
-        gets(library[count].author);
+        s_gets(library[count].author, MAXAUTL);
         printf("Now enter the value.\n");
         scanf("%f", &library[count++].value);
         while (getchar() != '\n')
@@ -42,4 +46,21 @@ int main(void)
     	printf("No books? Too bad.\n");
     
     return 0;
+}
+
+char * s_gets(char *s, int n){
+	char * ret;
+	char * find;
+	
+	ret = fgets(s, n, stdin);
+	if (ret){
+		find = strchr(s, '\n');
+		if (find)
+			*find = '\0';
+		else
+			while(getchar() != '\n')
+				continue;
+	}
+	
+	return ret;
 }

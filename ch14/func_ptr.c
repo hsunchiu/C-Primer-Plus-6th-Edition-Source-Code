@@ -3,6 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
+#define LEN 81
+
 char showmenu(void);
 void eatline(void);     // read through end of line    
 void show(void (* fp)(char *), char * str);
@@ -10,17 +12,18 @@ void ToUpper(char *);   // convert string to uppercase
 void ToLower(char *);   // convert string to uppercase 
 void Transpose(char *); // transpose cases             
 void Dummy(char *);     // leave string unaltered      
+char *s_gets(char *s, int n);
 
 int main(void)
 {
-    char line[81];
-    char copy[81];
+    char line[LEN];
+    char copy[LEN];
     char choice;
     void (*pfun)(char *); // points a function having a
                           // char * argument and no    
                           // return value              
     puts("Enter a string (empty line to quit):");
-    while (gets(line) != NULL && line[0] != '\0')
+    while (s_gets(line, LEN) != NULL && line[0] != '\0')
     {
         while ((choice = showmenu()) != 'n')
         {
@@ -106,3 +109,19 @@ void show(void (* fp)(char *), char * str)
     (*fp)(str); // apply chosen function to str
     puts(str);  // display result
 }
+
+char *s_gets(char *s, int n){
+	char *ret;
+	
+	ret = fgets(s, n, stdin);
+	if(ret){
+		while(*s != '\n' && *s != '\0')
+			s++;
+		if(*s == '\n')
+			*s = '\0';
+		else
+			while(getchar() != '\n');
+	}
+
+	return ret;
+}		

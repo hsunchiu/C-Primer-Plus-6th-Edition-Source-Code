@@ -1,9 +1,12 @@
 /* booksave.c -- saves structure contents in a file */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define MAXTITL   40
 #define MAXAUTL   40
 #define MAXBKS   10             /* maximum number of books */
+
+char *s_gets(char *s, int n);
 
 struct book {                   /* set up book template    */
     char title[MAXTITL];
@@ -44,11 +47,11 @@ int main(void)
     
     puts("Please add new book titles.");
     puts("Press [enter] at the start of a line to stop.");
-    while (count < MAXBKS && gets(library[count].title) != NULL
+    while (count < MAXBKS && s_gets(library[count].title, MAXTITL) != NULL
                           && library[count].title[0] != '\0')
     {
         puts("Now enter the author.");
-        gets(library[count].author);
+        s_gets(library[count].author, MAXAUTL);
         puts("Now enter the value.");
         scanf("%f", &library[count++].value);
         while (getchar() != '\n')
@@ -73,4 +76,22 @@ int main(void)
     fclose(pbooks);
     
     return 0;
+}
+
+char * s_gets(char *s, int n){
+	char *ret;
+	char *find;
+
+	ret = fgets(s, n, stdin);
+	
+	if(ret){
+		find = strchr(s, '\n');
+		if(find)
+			*find = '\0';
+		else
+			while(getchar() != '\n')
+				continue;
+	}
+
+	return ret;
 }

@@ -3,6 +3,8 @@
 #include <string.h>    // for strcmp()
 #include <stdbool.h>   // C99 feature
 
+char *s_gets(char *s, int n);
+
 enum spectrum {red, orange, yellow, green, blue, violet};
 const char * colors[] = {"red", "orange", "yellow",
                          "green", "blue", "violet"};
@@ -15,7 +17,7 @@ int main(void)
     bool color_is_found = false;
 
     puts("Enter a color (empty line to quit):");
-    while (gets(choice) != NULL && choice[0] != '\0')
+    while (s_gets(choice, LEN) != NULL && choice[0] != '\0')
     {
         for (color = red; color <= violet; color++)
         {
@@ -49,4 +51,20 @@ int main(void)
     puts("Goodbye!");
     
     return 0;
+}
+
+char *s_gets(char *s, int n){
+	char *ret;
+	char *find;
+
+	ret = fgets(s, n, stdin);
+	if(ret){
+		find = strchr(s, '\n');
+		if (find)
+			*find = '\0';
+		else
+			while(getchar() != '\n');
+	}
+
+	return ret;
 }
