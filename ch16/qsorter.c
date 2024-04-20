@@ -1,6 +1,7 @@
 /* qsorter.c -- using qsort to sort groups of numbers */
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define NUM 40
 void fillarray(double ar[], int n);
@@ -10,6 +11,7 @@ int mycomp(const void * p1, const void * p2);
 int main(void)
 {
     double vals[NUM];
+    srand(time(NULL));
     fillarray(vals, NUM);
     puts("Random list:");
     showarray(vals, NUM);
