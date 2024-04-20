@@ -1,7 +1,7 @@
 /* addaword.c -- uses fprintf(), fscanf(), and rewind() */
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX 40
+#define MAX 41
 
 int main(void)
 {
@@ -16,7 +16,7 @@ int main(void)
      
     puts("Enter words to add to the file; press the Enter");
     puts("key at the beginning of a line to terminate.");
-    while (gets(words) != NULL  && words[0] != '\0')
+    while ((fscanf(stdin, "%40s", words) == 1)  && words[0] != '\0')
         fprintf(fp, "%s ", words);
      
     puts("File contents:");
