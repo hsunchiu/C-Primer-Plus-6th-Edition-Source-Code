@@ -11,6 +11,7 @@ void showpets(const Tree * pt);
 void findpet(const Tree * pt);
 void printitem(Item item);
 void uppercase(char * str);
+char *s_gets(char *s, int n);
 
 int main(void)
 {
@@ -76,9 +77,9 @@ void addpet(Tree * pt)
     else
     {
         puts("Please enter name of pet:");
-        gets(temp.petname);
+        s_gets(temp.petname, 20);
         puts("Please enter pet kind:");
-        gets(temp.petkind);
+        s_gets(temp.petkind, 20);
         uppercase(temp.petname);
         uppercase(temp.petkind);
         AddItem(&temp, pt);
@@ -110,9 +111,9 @@ void findpet(const Tree * pt)
     }
 
     puts("Please enter name of pet you wish to find:");
-    gets(temp.petname);
+    s_gets(temp.petname, 20);
     puts("Please enter pet kind:");
-    gets(temp.petkind);
+    s_gets(temp.petkind, 20);
     uppercase(temp.petname);
     uppercase(temp.petkind);
     printf("%s the %s ", temp.petname, temp.petkind);
@@ -133,9 +134,9 @@ void droppet(Tree * pt)
     }
 
     puts("Please enter name of pet you wish to delete:");
-    gets(temp.petname);
+    s_gets(temp.petname, 20);
     puts("Please enter pet kind:");
-    gets(temp.petkind);
+    s_gets(temp.petkind, 20);
     uppercase(temp.petname);
     uppercase(temp.petkind);
     printf("%s the %s ", temp.petname, temp.petkind);
@@ -152,4 +153,20 @@ void uppercase(char * str)
         *str = toupper(*str);
         str++;
     }
+}
+
+char* s_gets(char *s, int n){
+	char * ret;
+
+	if((ret = fgets(s, n, stdin))){
+		while(*s != '\n' && *s != '\0')
+			s++;
+		if(*s == '\n')
+			*s = '\0';
+		else
+			while(getchar() != '\n');
+	
+	}
+	
+	return ret;
 }

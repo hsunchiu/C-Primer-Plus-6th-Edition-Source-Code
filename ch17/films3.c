@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>    /* prototype for exit() */
 #include "list.h"      /* defines List, Item   */
+char *s_gets(char *s, int n);
 void showmovies(Item item);
 
 int main(void)
@@ -21,7 +22,7 @@ int main(void)
     
 /* gather and store */
     puts("Enter first movie title:");
-    while (gets(temp.title) != NULL && temp.title[0] != '\0')
+    while (s_gets(temp.title, TSIZE) != NULL && temp.title[0] != '\0')
     {
         puts("Enter your rating <0-10>:");
         scanf("%d", &temp.rating);
@@ -64,3 +65,16 @@ void showmovies(Item item)
             item.rating); 
 }
 
+char *s_gets(char *s, int n){
+	char * ret;
+	if((ret = fgets(s, n, stdin))){
+		while(*s != '\n' && *s != '\0')
+			s++;
+		if(*s == '\n')
+			*s = '\0';
+		else
+			while(getchar() != '\n');
+	}
+	
+	return ret;
+}

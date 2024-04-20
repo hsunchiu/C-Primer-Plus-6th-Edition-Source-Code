@@ -3,6 +3,8 @@
 #define TSIZE        45      /* size of array to hold title   */
 #define FMAX         5       /* maximum number of film titles */
 
+char *s_gets(char * s, int n);
+
 struct film {
     char title[TSIZE];
     int rating;
@@ -15,7 +17,7 @@ int main(void)
     int j;
 
     puts("Enter first movie title:");
-    while (i < FMAX && gets(movies[i].title) != NULL &&
+    while (i < FMAX && s_gets(movies[i].title, TSIZE) != NULL &&
            movies[i].title[0] != '\0')
     {
         puts("Enter your rating <0-10>:");
@@ -37,3 +39,21 @@ int main(void)
     return 0;
 }
 
+char *s_gets(char *s, int n){
+	char * ret;
+	
+	ret = fgets(s, n, stdin);
+	
+	if(ret) {
+		while(*s != '\n' && *s != '\0') {
+			s ++;
+		}
+
+		if(*s == '\n')
+			*s = '\0';
+		else
+			while(getchar() != '\n');
+	}
+
+	return ret;
+}

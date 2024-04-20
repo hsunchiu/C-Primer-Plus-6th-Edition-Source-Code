@@ -3,6 +3,7 @@
 #include <stdlib.h>      /* has the malloc prototype      */
 #include <string.h>      /* has the strcpy prototype      */
 #define TSIZE    45      /* size of array to hold title   */
+char *s_gets(char *s, int n);
 
 struct film {
     char title[TSIZE];
@@ -18,7 +19,7 @@ int main(void)
 
 /* Gather  and store information          */
     puts("Enter first movie title:");
-    while (gets(input) != NULL && input[0] != '\0')
+    while (s_gets(input, TSIZE) != NULL && input[0] != '\0')
     {
         current = (struct film *) malloc(sizeof(struct film));
         if (head == NULL)       /* first structure       */
@@ -60,3 +61,16 @@ int main(void)
     return 0;
 }
 
+char *s_gets(char *s, int n){
+	char *ret;
+	ret = fgets(s, n, stdin);
+	if(ret){
+		while(*s != '\n' && *s != '\0')
+			s++;
+		if(*s == '\n')
+			*s = '\0';
+		else
+			while(getchar() != '\n');
+	}
+	return ret;
+}
