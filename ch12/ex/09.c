@@ -22,7 +22,7 @@ int main(){
 		if (arr) {
 			char line[LINE];	
 			int i = 0;
-			// FIX: can't read the correct word
+			// FIX: can't read the correct word Maybe blocking problem?
 			while(i < size && scanf("%s",line) == 1) {
 				char * s = malloc(strlen(line) * sizeof(char) + 1);
 				//TODO: check the error of malloc failure.
