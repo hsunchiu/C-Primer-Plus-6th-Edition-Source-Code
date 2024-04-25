@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
 			fprintf(stdout, "Open the file %s and the contents is \n", argv[i]);
 			while((ch = getc(fp)) != EOF)
 				putc(ch, stdout);
+			(void)fclose(fp);
 		}
 	}
 	

@@ -19,8 +19,8 @@ void fget(char * string, int n, FILE *file);
 int main(int argc, char *argv[])
 {
 	FILE *file1, *file2;
-	char tmp[LLEN];
 	int ch;
+	char tmp[LLEN];
 
 	if (argc < 3)
 	{
@@ -41,16 +41,17 @@ int main(int argc, char *argv[])
 
 	while (1)
 	{
+		tmp[0] = '\0';
 		fget(tmp, LLEN, file1);
-		printf("%-*s\n", LLEN, tmp);
+		printf("%-*s\t", LLEN, tmp);
+
+		tmp[0] = '\0';
 		fget(tmp, LLEN, file2);
 		printf("%-*s\n", LLEN, tmp);
+
 		if (feof(file1) && feof(file2))
 			break;
 	}
-	
-	(void)fclose(file1);
-	(void)fclose(file2);
 
 	return 0;
 }
